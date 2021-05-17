@@ -37,6 +37,7 @@ resource "aws_route53_record" "delegation" {
 }
 
 ## Wildcard Cert ##
+/*
 resource "tls_private_key" "ctrl" {
   algorithm = "RSA"
   depends_on = [
@@ -97,4 +98,4 @@ resource "aws_s3_bucket_object" "key" {
   depends_on = [
     local_file.priv, local_file.cert
   ]
-}
+}*/

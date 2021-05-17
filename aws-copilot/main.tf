@@ -8,7 +8,7 @@ data "aws_ami" "avx_copilot" {
   most_recent = true
   filter {
     name   = "name"
-    values = ["*copilot-100G-1183*"]
+    values = ["*copilot-se-image-100G-V2*"]
   }
   filter {
     name   = "virtualization-type"

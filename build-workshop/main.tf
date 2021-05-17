@@ -65,18 +65,14 @@ module "app_vnet" {
 }
 
 #AWS
-module "transit_aws" {
-  source  = "terraform-aviatrix-modules/aws-transit/aviatrix"
-  version = "2.0.0"
-
-  name          = "aws-transit"
-  cidr          = "10.${var.pod_id}.48.0/20"
-  region        = var.aws_region
-  account       = aviatrix_account.aws.account_name
-  instance_size = "t2.small"
-  ha_gw         = false
-  prefix        = false
-  suffix        = false
+resource "aviatrix_vpc" "transit_aws" {
+  cloud_type           = 1
+  account_name         = aviatrix_account.aws.account_name
+  region               = var.aws_region
+  name                 = "aws-transit"
+  cidr                 = "10.${var.pod_id}.48.0/20"
+  aviatrix_transit_vpc = true
+  aviatrix_firenet_vpc = false
 }
 
 module "spoke_aws_1" {

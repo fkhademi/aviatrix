@@ -3,23 +3,15 @@ variable "ctrl_user" {
   description = "Aviatrix admin user"
   default     = "admin"
 }
-variable "ctrl_password" {
-  default = "Password123"
-}
+variable "ctrl_password" { }
 variable "cplt_user" {
   default     = "copilot"
 }
-variable "cplt_password" {
-  default = "Copilot123!"
-}
+variable "cplt_password" { }
 
 # AWS account for Route53 
-variable "aws_access_key" {
-  description = "AWS Access Key"
-}
-variable "aws_secret_key" {
-  description = "AWS Secret Key"
-}
+variable "aws_access_key" { }
+variable "aws_secret_key" { }
 variable "region" {
   description = "AWS region to deploy resources"
   default     = "eu-central-1"
