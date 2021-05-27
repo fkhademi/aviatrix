@@ -14,6 +14,6 @@ The following variables are optional:
 
 key | value | description
 --- | --- | ---
-region | eu-central-1 | AWS Region to deploy AVX Controller
+region | eu-central-1 | AWS Region to deploy AVX Co-Pilot
 instance_size | m5.2xlarge | EC2 instance size
-instance_name | aviatrix-controller | EC2 instance name
+instance_name | aviatrix-copilot | EC2 instance name
