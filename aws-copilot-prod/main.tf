@@ -4,6 +4,20 @@ provider "aws" {
   secret_key = var.aws_secret_key
 }
 
+data "aws_ami" "cplt" {
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["*Aviatrix CoPilot*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+  owners = ["472991774533"]
+}
+
+
 resource "aws_security_group" "sg" {
   name   = "${var.instance_name}-sg"
   vpc_id = var.vpc_id
@@ -34,17 +48,17 @@ resource "aws_security_group" "sg" {
   }
 }
 
-resource "aws_eip" "ctrl" {
+resource "aws_eip" "cplt" {
   vpc = true
 }
 
-resource "aws_eip_association" "ctrl" {
-  instance_id   = aws_instance.ctrl.id
-  allocation_id = aws_eip.ctrl.id
+resource "aws_eip_association" "cplt" {
+  instance_id   = aws_instance.cplt.id
+  allocation_id = aws_eip.cplt.id
 }
 
-resource "aws_instance" "ctrl" {
-  ami                         = "ami-0ef23847d2716838e"
+resource "aws_instance" "cplt" {
+  ami                         = data.aws_ami.cplt.id
   instance_type               = var.instance_size
   subnet_id                   = var.subnet_id
   security_groups             = [aws_security_group.sg.id]
