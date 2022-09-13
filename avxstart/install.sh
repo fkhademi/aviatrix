@@ -1,10 +1,12 @@
 #!/bin/bash
 # install shortcuts for starting the controller and updating security groups in AWS
 
-SHELL_FILE="zprofile"  # set to bashrc for bash
+SHELL_FILE="/etc/zprofile"  # set to /etc/bashrc or $HOME/.bash_profile for bash
 AVX="$HOME/.avx"
 mkdir $AVX
 curl -s https://raw.githubusercontent.com/fkhademi/aviatrix/main/avxstart/start_avx.py -o $AVX/start_avx.py
+
+chmod +x $AVX/start_avx.py
 
 echo "Enter AWS Region:"
 read region
@@ -29,7 +31,7 @@ region=${region}
 [copilot]
 instance_id=${cplt_id}
 sg_id=${cplt_sg_id}
-region=${region}" >> $AVX/aviatrix.cfg
+region=${region}" > $AVX/aviatrix.cfg
 
 read -p "Do you need pip3 and the python packages? <y/N> " prompt
 if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
@@ -39,16 +41,16 @@ then
     python3 ~/get_pip.py
 
     echo "Getting a few pythong packages ..."
-    sudo pip3 install boto3 configparser requests urllib3
+    pip3 install boto3 configparser requests urllib3
 fi
 
 echo "Updating shortcuts ..."
-if grep -q "avxgo" /etc/$SHELL_FILE 
+if grep -q "avxgo" $SHELL_FILE 
 then
     echo "Shortcuts already exist ..."
 else
     echo "Adding shortcuts ..."
-    cat <<EOT >> /etc/${SHELL_FILE}
+    cat <<EOT >> ${SHELL_FILE}
 alias avxgo="python3 ${AVX}/start_avx.py -a start"
 alias avxstop="python3 ${AVX}/start_avx.py -a stop"
 alias avxupdate="python3 ${AVX}/start_avx.py -a update"
@@ -61,8 +63,6 @@ EOT
 fi
 
 sleep 5
-
-source $HOME/.bash_profile
 
 echo "DONE ...
 The following commands have been added:

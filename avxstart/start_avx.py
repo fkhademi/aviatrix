@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Script to start or stop the Controller and update the SG with client IP
 
 import requests
