@@ -1,7 +1,7 @@
 #!/bin/bash
 # install shortcuts for starting the controller and updating security groups in AWS
 
-SHELL_FILE="/etc/zprofile"  # set to /etc/bashrc or $HOME/.bash_profile for bash
+SHELL_FILE="$HOME/.zshrc"  # set to /etc/bashrc or $HOME/.bash_profile for bash
 AVX="$HOME/.avx"
 mkdir $AVX
 curl -s https://raw.githubusercontent.com/fkhademi/aviatrix/main/avxstart/start_avx.py -o $AVX/start_avx.py
